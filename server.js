@@ -1,24 +1,20 @@
+'use strict';
+
+// TODO: REQUIRE PACKAGES
+require('dotenv').config();
 const express = require('express');
+const mongoose = require('mongoose');
+const morgan = require('morgan');
 const app = express();
-const PORT = 3001;
+const PORT = process.env.PORT;
+const boardRouter = require('./app/routes/boardRouter');
 
-/*
-GET - "/" - GIVE US ALL DATA FOR BOARD
-PUT - "/boardtitle" - UPDATE BOARD TITLE
-POST - "/list" - ADD A LIST
-POST - "/list/:list_id/card" - ADD A CARD TO A LIST
-PUT - "/list/:list_id/title" - UPDATE LIST TITLE
-PUT - "/list/:list_id/card/:card_id" - UPDATE CARD DATA
-DELETE - "/list/:list_id" - REMOVE A LIST
-DELETE - "/list/:list_id/card/:card_id" - REMOVE A CARD FROM A LIST
-*/
+// TODO: CONFIGURE PACKAGES
+app.use(morgan('common'));
 
-app.get('/', (request, response) => {
-  response.send('data for board');
-});
+app.use('/', boardRouter);
 
-
-
+// TODO: CONNECT TO MONGO AND START SERVER
 app.listen(PORT, () => {
   console.log(`Your server is running on port ${PORT}\n...you better go and catch it.`);
 });
