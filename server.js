@@ -14,7 +14,9 @@ app.use(morgan('common'));
 
 app.use('/', boardRouter);
 
-// TODO: CONNECT TO MONGO AND START SERVER
+mongoose.connect(process.env.DATABASE_URL, {'useNewUrlParser': true, 'useUnifiedTopology': true});
+
 app.listen(PORT, () => {
   console.log(`Your server is running on port ${PORT}\n...you better go and catch it.`);
 });
+// ~/Code/personal-projects/task-manager/task-manager-server/primer-dataset.json
